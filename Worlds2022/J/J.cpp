@@ -8,6 +8,19 @@ ll N,M,A,Q;
 
 // si vengo de split multiplico *2 o *2 + 1
 
+ll func(ll x, vll& si, vll& pa, vll& pb){
+    if(si[x] != -1) return si[x];
+    if(pa[x] == -1 && pb[x] == -1) return -1;
+    if(pa[x] != -1 && pb[x] != -1) return si[x] = func(pa[x], si, pa, pb) + func(pb[x], si, pa, pb);
+    if(pa[x] == -1) return si[x] = func(pb[x], si, pa, pb)/2;
+    else{
+        ll t = func(pa[x], si, pa, pb);
+        t += t%2;
+        t /= 2;
+        return si[x] = t;
+    }
+} 
+
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -18,7 +31,7 @@ int main(){
     vll pb(d+10, -1);
     vll ha(d+10, -1);
     vll hb(d+10, -1);
-    vll si(d+10);
+    vll si(d+10, -1);
 
     si[1] = N;
     for(int i = 0; i < M; i++){
@@ -42,15 +55,16 @@ int main(){
         }
     }
 
+    
     for(int i = 1; i < d + 10; i++){
-        if(ha[i] == -1) continue;
-        if(hb[i] == -1){
-            si[ha[i]] += si[i];
-        }else{
-            si[ha[i]] = (si[i]%2 + si[i])/2;
-            si[hb[i]] = si[i]/2;
-        }
+        func(i, si, pa, pb);
     }
+    /*
+    for(int i = 0; i < 10; i++){
+        cout << si[i] << endl;
+    }*/
+        
+
     
     while(Q--){
         ll a, k;
