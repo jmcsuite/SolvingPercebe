@@ -7,7 +7,6 @@ using pii = pair<int,int>;
 
 const int maxN = 101;
 const int maxn = 101;
-ll pprev[maxN], nnext[maxN];
 ll mod= 1e9+7;
 int n;
 
@@ -33,14 +32,9 @@ int main(){
     ll N, M, K;
     cin >> N >> M >> K;
     n = N+1;
-    for(int i = 0; i < maxN; i++){
-        pprev[i] = 1;
-        nnext[i] = 0;
-    }
     vector<pii> edges(M);
     ll a, b;
     for(int i = 0; i < M; i++){
-        
         cin >> a >> b;
         ady[a][b] = 1;
         ady[b][a]= 1;
