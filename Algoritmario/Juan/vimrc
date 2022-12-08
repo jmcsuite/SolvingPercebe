@@ -1,9 +1,13 @@
 # Create .vimrc file in home
 set nu
-set rnu
+set rnu 
 set nowrap
 
 set expandtab
 set shiftwidth=4
 set softtabstop=4
 filetype indent on
+
+inoremap hnh <esc>
+onoremap hnh <esc>
+vnoremap hnh <esc>
