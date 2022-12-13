@@ -1,0 +1,15 @@
+Tema                            |Texto                          |Problemas                  |Algoritmario
+-------------------------------------------------------------------------------------------------------------------------
+Tarjan                          |                               |                           |
+XOR-Basis                       |                               |                           |
+Matrix-Exp                      |                               |                           |
+Dinic-Flows                     |                               |                           |
+Segment Tree                    |                               |                           |
+Fenwick-Tree                    |                               |                           |
+Centroid Decomposition          |                               |                           |
+2Sat                            |                               |                           |
+
+
+Example                         |                               |                           |
+Example                         |                               |                           |
+Example                         |✔                              |✖                          |✔
