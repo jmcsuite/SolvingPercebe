@@ -10,6 +10,9 @@ Centroid Decomposition          |                               |               
 2Sat                            |                               |                           |
 Nim's-Game                      |                               |                           |
 LCA                             |                               |                           |
+1e8-Sieve                       |                               |                           |
+Triangle-Area                   |                               |                           |
+
 
 Example                         |                               |                           |
 Example                         |                               |                           |
