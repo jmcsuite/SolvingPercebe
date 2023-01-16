@@ -1,26 +1,26 @@
-Tema                            |Texto                          |Algoritmario
+Tema                            |Contest                        |Algoritmario
 -------------------------------------------------------------------------------------------------------------------------
-Tarjan                          |                               |
+Tarjan                          |✔                              |✖
 XOR-Basis                       |✔                              |✖
-Matrix-Exp                      |                               |
-Dinic-Flows                     |                               |
+Matrix-Exp                      |✔                              |✖
+Dinic-Flows                     |✔                              |✖
 Segment-Tree                    |✔                              |✖
-Segment-Tree-Lazy               |                               |
+Segment-Tree-Lazy               |✔                              |✖
 Fenwick-Tree                    |✔                              |✖
-Centroid Decomposition          |                               |
+Centroid Decomposition          |✔                              |✖
 Heavy Light Decomposition       |                               |
 2Sat                            |✔                              |✖
-Nim's-Game                      |                               |
-LCA                             |                               |
+Nim's-Game                      |✔                              |✖
+LCA                             |✔                              |✖
 1e8-Sieve                       |                               |
-Triangle-Area                   |                               |✖
+Triangle-Area                   |✔                              |✖
 Mo                              |                               |
-SqrtDecomposition               |✔                              |
+SqrtDecomposition               |                               |
 Convex Hull Trick               |                               |
 Divide&Conquer DP               |                               |
 Knuths Optimization             |                               |
 Sweep Line                      |                               |
-KMP-ZFunction                   |✔                              |
+KMP-ZFunction                   |✔                              |✖
 KMP-Automata                    |                               |
 String Hashing                  |                               |
 Trie                            |                               |
