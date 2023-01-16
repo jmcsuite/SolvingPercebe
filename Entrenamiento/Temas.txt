@@ -12,6 +12,8 @@ Nim's-Game                      |                               |               
 LCA                             |                               |                           |
 1e8-Sieve                       |                               |                           |
 Triangle-Area                   |                               |                           |
+Mo                              |✔                              |                           |
+SqrtDecomposition               |✔                              |                           |
 
 
 Example                         |                               |                           |
