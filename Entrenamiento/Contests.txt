@@ -4,7 +4,7 @@ GPMexico-2022-1                 |✔                              |             
 GPMexico-2022-2                 |✔                              |                           |
 GPMexico-2022-3                 |✔                              |                           |
 Repechaje-2022                  |✔                              |                           |
-TMX-Dia1                        |✔                              |                           |
+TMX-Dia1                        |                               |                           |
 TMX-Dia2                        |                               |                           |
 TMX-Dia3                        |                               |                           |
 TMX-Dia4                        |                               |                           |

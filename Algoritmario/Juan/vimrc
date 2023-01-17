@@ -12,3 +12,5 @@ inoremap hnh <esc>
 onoremap hnh <esc>
 vnoremap hnh <esc>
 tnoremap hnh <C-\><C-n> 
+
+syntax on
