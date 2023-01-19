@@ -1,4 +1,6 @@
 struct segmentTree{
+    //Define maxn
+    static const int maxn = 1e5+1;
     //Define Segment Tree container
     struct str{
         ll first;
@@ -20,13 +22,11 @@ struct segmentTree{
     str func(str a, str b){ 
         return (a.first < b.first ? a : b);
     }
-    vector<str> st;
+    str st[maxn];
     ll n;
     // Recieves a 0-indexed array
     void build(vll& vl, int sizn){
         n = sizn;
-        st.clear();
-        st.resize(n*2);
         for(int i=0;i<n;i++){
             st[i+n].first = vl[i];
             st[i+n].second = i;
@@ -39,12 +39,8 @@ struct segmentTree{
     // Position is 0-indexed
     // Value is replaced
     void update(int pos, str x){
-        pos+=n;
-        st[pos] = x; 
-        pos/=2;
-        while(pos){
+        for(pos+=n,st[pos]=x,pos/=2; pos; pos/=2){
             st[pos] = func(st[pos*2],st[pos*2+1]);
-            pos/=2;
         }
     }
 

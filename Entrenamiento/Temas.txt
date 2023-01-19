@@ -4,7 +4,7 @@ Tarjan                          |✔                              |✖
 XOR-Basis                       |✔                              |✖
 Matrix-Exp                      |✔                              |✖
 Dinic-Flows                     |✔                              |✖
-Segment-Tree                    |✔                              |✖
+Segment-Tree                    |✔                              |✔
 Segment-Tree-Lazy               |✔                              |✖
 Fenwick-Tree                    |✔                              |✖
 Centroid Decomposition          |✔                              |✖
@@ -13,7 +13,7 @@ Heavy Light Decomposition       |                               |
 Nim's-Game                      |✔                              |✖
 LCA                             |✔                              |✖
 1e8-Sieve                       |                               |
-Triangle-Area                   |✔                             |✖
+Triangle-Area                   |✔                              |✖
 Mo                              |                               |
 SqrtDecomposition               |                               |
 Convex Hull Trick               |✔                              |
