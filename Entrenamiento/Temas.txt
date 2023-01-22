@@ -20,7 +20,8 @@ Convex Hull Trick               |✔                              |
 Divide&Conquer DP               |                               |
 Knuths Optimization             |                               |
 Sweep Line                      |                               |
-KMP-ZFunction                   |✔                              |✖
+KMP                             |✔                              |✔
+ZFunction                       |                               | 
 KMP-Automata                    |                               |
 String Hashing                  |                               |
 Trie                            |                               |
