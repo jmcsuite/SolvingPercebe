@@ -37,6 +37,7 @@ struct segmentTree{
             st[x] = merge(st[x*2], st[x*2+1]);
             // IMPORTANTE. El flag d[x] puede no haberse propagado;
             // Cual seria el valor de st[x], si d[x] se hubiera propagado?
+            // Ejemplo si nuestra operacion es la suma, st[x] += range*d[x]
             st[x] = ifPropagated(x);
         }
     }
