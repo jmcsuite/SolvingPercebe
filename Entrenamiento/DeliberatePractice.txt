@@ -1,0 +1,146 @@
+Deliberate Practice
+
+----
+Deliberate practice in icpc is a framework to consitently learn, maximizing your efforts.
+Every topic, problem or algorithm can be learn. If you feel stuck, it's not because
+of your talent or capabilities, but instead on the approach and practice method you take.
+
+The main idea behind this framework is simple. To get good at icpc, you have to train icpc.
+Not codeforces , even though it can help. 
+Another Big Idea, is that learning occurs outside of your confort zone, so doing a lot of
+problems in which you are already good, won't help you. You will get worse.
+Thi final idea, is that it is not only about taking an objective, outside of your confort zone, 
+but it is also about choosing the right objective.
+
+For example, you may want to classify to ICPC Finals. Nice objectvie outside of the confort zone.
+But if you only focus in that big picture, then how can you train? You need to decompose
+your objective into learnable milestones, that will improve. Which milestones to choose?
+Well copy the path of the experts in the area.
+
+-----
+Experts General approach.
+-----
+ICPC training has 2 things. Team practice and Individual practice. A rule of thumb is to spend
+20% in team practice, and 75% or 90% in individual practice.
+
+Team practice is relevant, when you have TEAM PROBLEMS:
+Example of team problems:
+    1.- Not reading all the problems
+    2.- Lacking time to solve the winning problems , even with the idea in mind
+    3.- Being suceptible at the scoreboard syndrome
+    4.- A lot of penalty and WA
+    5.- Overall lack of direction in the contest.
+To solve this problems, well, do team contests and try to focus in this issues. Fixing little problems
+implementing reproduceable frameworks.
+
+What about individual problems
+Well, that is divided in several topics.
+
+
+----- Problem Understanding ------
+This is the first step in every problem. Problem understanding is about understanding the Constraints,
+Examples, test cases, input output, skimming the garbage part of the problem. Also being fast at this
+is really important in icpc.
+
+How to identify errors in this area? 
+LOG your times understanding the problem. LOG whenever you are going back to reread the problem. 
+In an ideal world, you are understanding a problem and summarizing it in some sentences and some bullet
+points. 
+
+Also log your mistakes, for example: Had to rewrite the solution to fit the output... well that
+means that you didn't think of the output while reading.
+
+How to solve problems here? Develop a framework. If you are missing important constraints, then when 
+reading your next problem remember to write those constraints out. Before the next training session
+focus on getting those contsraints.
+
+Aside from this, there is no good literature on this. So you have to be perceptive and always think
+in your mistakes.
+
+ 
+
+----- Problem Solving -----
+This are the set of steps in which you take a problem statemnt/concept, and you reduce it, change it
+iterate on it, until you reach a solution/algorithm. Problem Solving is the most abstract thing to 
+improve, that is why you have to develope frameworks to find your mistakes, fix those frameworks
+and make new mistakes.
+
+A basic framework looks as follows:
+Is this problem similar to one I know?
+If I change one constraint, can I solve the problem?
+If I know that X is true, then can I solve Y?
+Is tis algorithm useful in this case?
+Can I compute this?
+
+etc etc. 
+Polya developed the best framework for problem solving, so read that book, and focus on learning it. 
+To learn it, you start with some part of the framework, and when making mistakes you start improving it
+focusing on making better questions next time. 
+It is important to LOG all of this in order to truly improve.
+
+---- Algorithm Knowledge ----
+In a perfect world you did the previous things good but you are lacking a concrete algorithm to solve
+the problem. This situation is perfect, because you already understand the problem, you gave your
+solution even if it didn't work, and now with this new algorithm you finally solve the problem.
+
+In reality, maybe you missed some steps in problem solving, and some other steps in understanding, etc
+which meant that you chose your problem wrong haha, you won't learn much.
+
+If you needed an algorithm to solve the problem, well go ahead and learn it. Just use cpbook or cp-algos
+do the core variations of the algorithm , and implement it on your own. Increasing your algorithm
+knowledge is pretty straight forward, but it may be scary for you, maybe because of the name of
+the algorithm or some stuff like that. But don't worry, if you did the above steps right and choose 
+a problem outside of your confort zone, then you can learn it no problem. It will be hard, but worth.
+
+It is also important to have it in your algorithm after you finish practicing it, so you can use it
+fast in hard contests.
+
+----- Implementation ----
+Implementation problems have various facets. It could be a speed problem. It could be a ton of bugs, 
+or a lot of messy code problem. It could be a confidence problem, in which you just dont want to 
+implement an algorithm. Whatever problem it is, make sure to LOG LOG LOG your implementation times and
+proccedures, so you are sure on what the problem was, and then plan your next training accordingly
+
+For example, you are writing a lot of bugs. Well try to find out what is happening? Is your code clear?
+Are you misunderstanding the problems? the constraints. Fix your framework to address this issues in
+the next training session.
+
+--- Debugging/Test Cases ----
+Are you giving up in finding the problem? Did you try test cases? Was the error in your idea and you 
+couldn't prove it? Well you are lacking in this area. 
+
+For example, let's say you programm a greedy and the solution was a DP but you couldn't find the error.
+Well you are having two mistakes, one in the problem side. and onether one in the debugging side. 
+You should know how to debug the greedy, for example, what is the main idea of the greedy? try to think 
+of the counter example. 
+
+Also you need to learn how to generate manually and automatically test cases.
+
+-------
+Final comments
+-----
+Training is an iterative process. You find out what went wrong, you drill into what went wrong, and you 
+implement a framework for fixing it next session, and your next session you focus on fixing that, 
+and gather new data, etc.
+
+Two big steps, Gattering Data: You gather data about your mistakes, your logic, your times, everything
+you find relevant to improve.
+You use that data, to make new frameworks, which will make different data: If you decide, that
+you want to focus on constraints, then when gattering the data, write down wether you focus on constraints.
+
+Next training session should be based on past training session, trying to measure if you are improving that area, 
+and logging to find future mistakes.
+
+---
+Juan
+
+
+
+
+
+
+
+
+
+
+
