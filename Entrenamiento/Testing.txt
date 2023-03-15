@@ -1,0 +1,28 @@
+Testing should be done methodically.
+You should follow steps, so that you minimize
+the computer time and the testing time.
+
+1.- Check for output format //Most common WA
+2.- Check for input format // Check that you are reading N-1 lines in trees for example, and that input is correct
+3.- Add logs in different checkpoints to test different ideas. 
+4.- Compile with all WARNINGs
+5.- Check Multicase
+
+At this point you print the result and the code and 
+you start debugging this:
+
+1.- Small manual test case. (run through your code manually)
+2.- Smallest answer, biggest answer, no answer, all types of answers.
+3.- Max test for array overflow, integer overflow.
+4.- Cornen cases, smallest n.
+5.- Equal numbers, if two numbers aren't specified to be distinct, 
+then they can be the same
+6.-Degenerate, empty set, three points in a line, a 
+graph that is a line.
+
+After you check for this, manually do some cases, draw them
+get the answer, then put them in a computer an check for differences
+
+
+
+Last step is stress testing, but this is the LAST RESORT

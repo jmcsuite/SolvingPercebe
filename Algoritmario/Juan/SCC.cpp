@@ -49,6 +49,7 @@ namespace Tarjan{
                 myComp[st.top()] = scc;
                 int y = st.top();
                 for(int z : vadj[y]){
+                    if(inStack[z]) continue;
                     z = myComp[z];
                     if(z == scc) continue;
                     compVadj[scc].insert(z);
@@ -61,6 +62,7 @@ namespace Tarjan{
             myComp[st.top()] = scc;
             int y = st.top();
             for(int z : vadj[y]){
+                if(inStack[z]) continue;
                 z = myComp[z];
                 if(z == scc) continue;
                 compVadj[scc].insert(z);

@@ -3,7 +3,7 @@ Tema                            |Contest                        |Algoritmario
 Tarjan                          |✔                              |✔
 XOR-Basis                       |✔                              |✖
 Matrix-Exp                      |✔                              |✖
-Dinic-Flows                     |✔                              |✖
+Dinic-Flows                     |✔                              |✔
 Segment-Tree                    |✔                              |✔
 Segment-Tree-Lazy               |✔                              |✖
 Fenwick-Tree                    |✔                              |✖
