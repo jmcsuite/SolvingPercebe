@@ -4,9 +4,10 @@ the computer time and the testing time.
 
 1.- Check for output format //Most common WA
 2.- Check for input format // Check that you are reading N-1 lines in trees for example, and that input is correct
+3.- Check for input file vs stdin 
 3.- Add logs in different checkpoints to test different ideas. 
 4.- Compile with all WARNINGs
-5.- Check Multicase
+5.- Check Multicase (reset variables, etc);
 
 At this point you print the result and the code and 
 you start debugging this:
