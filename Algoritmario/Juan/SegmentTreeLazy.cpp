@@ -22,7 +22,7 @@ struct segmentTree{
             //st[i+n] = val; assignar los valores iniciales
         }
         for(int i=n-1; i>0; i--){
-            st[i]=merge(st[i*2]|st[i*2+1]);
+            st[i]=merge(st[i*2],st[i*2+1]);
         }
     }
 
