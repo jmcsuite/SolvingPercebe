@@ -10,7 +10,7 @@ function gc {
 function tn {
     for (( i=1; i<=$2; i++))
     do
-        if ./$1.exe < $i.in > $i.out; thenecho "Ran Test $i"
+        if ./$1.exe < $i.in > $i.out; then echo "Ran Test $i"
         else
             echo "Exploded Test $i"
         fi

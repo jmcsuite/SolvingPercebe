@@ -1,0 +1,14 @@
+A.cpp: In function ‘ll Dinics::blockFlow(int, ll, int)’:
+A.cpp:63:21: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::pair<long long int, long long int> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+   63 |         if(index[x] >= layered[x].size()) return 0;
+      |            ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+A.cpp:64:12: warning: unused variable ‘ans’ [-Wunused-variable]
+   64 |         ll ans = 0;
+      |            ^~~
+A.cpp: In function ‘int main()’:
+A.cpp:205:27: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::pair<long long int, long long int> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  205 |             for(int j=0; j<ans[i].size(); j++){
+      |                          ~^~~~~~~~~~~~~~
+A.cpp:116:12: warning: unused variable ‘nNodes’ [-Wunused-variable]
+  116 |         ll nNodes = 0;
+      |            ^~~~~~
