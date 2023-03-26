@@ -1,6 +1,6 @@
 ## Compilation and testing ###
 function gc {
-    if g++ $1.cpp -o $1.exe -Wall --std=c++20 2> log.txt; then
+    if g++ $1.cpp -o $1.exe -Wall -Werror --std=c++20 2> log.txt; then
         echo "Compiled Succesfully!"
     else
         less log.txt;
