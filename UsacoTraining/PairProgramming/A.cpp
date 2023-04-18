@@ -7,12 +7,15 @@ using pll = pair<ll,ll>;
 const long long mod = 1000000007;
 const int maxn=2002;
 
-ll dp[maxn][maxn];
-ll rowSum[maxn][maxn];
-ll colSum[maxn][maxn];
+ll dp[maxn][maxn][2];
+ll rowSum[maxn][maxn][2];
+ll colSum[maxn][maxn][2];
 
 ll nextN[maxn];
 ll nextM[maxn];
+
+ll nextND[maxn];
+ll nextMD[maxn];
 
 int main(){
     ios::sync_with_stdio(0);
@@ -36,15 +39,24 @@ int main(){
 
         N = a.size();
         ll M = b.size();
-        for(int i=0; i<=N; i++){
-            for(int j=0; j<=M; j++) dp[i][j] = rowSum[i][j] = colSum[i][j] = 0;
+        for(int i=0; i<=N+1; i++){
+            for(int j=0; j<=M+1; j++) dp[i][j][0] = rowSum[i][j][0] = colSum[i][j][0] = dp[i][j][1] = rowSum[i][j][1] = colSum[i][j][1] = 0;
         }
-        for(int i=0; i<N; i++) dp[i][M]=rowSum[i][M]=colSum[i][M]=1;
-        for(int j=0; j<M; j++) dp[N][j]=rowSum[N][j]=colSum[N][j]=1;
-        dp[N][M] = 1;
-        rowSum[N][M] = colSum[N][M] = 1;
-        for(int i=N-1; i>=0; i--) colSum[i][M] = (colSum[i][M] + colSum[i+1][M])%mod;
-        for(int j=M-1; j>=0; j--) rowSum[N][j] = (rowSum[N][j] + rowSum[N][j+1])%mod;
+        for(int i=0; i<N; i++) {
+            if(a[i] == '+') dp[i][M][0]=rowSum[i][M][0]=colSum[i][M][0]=1;
+            else dp[i][M][1]=rowSum[i][M][1]=colSum[i][M][1]=1;
+        }
+        for(int j=0; j<M; j++) {
+            if(b[j] == '+') dp[N][j][0]=rowSum[N][j][0]=colSum[N][j][0]=1;
+            else dp[N][j][1]=rowSum[N][j][1]=colSum[N][j][1]=1;
+        }
+        dp[N][M][0] = dp[N][M][1] = 1;
+        rowSum[N][M][0] = colSum[N][M][0] = rowSum[N][M][1] = colSum[N][M][1] = 1;
+        for(int i=N-1; i>=0; i--) rowSum[i][M][0] = (rowSum[i][M][0] + rowSum[i+1][M][0])%mod;
+        for(int j=M-1; j>=0; j--) colSum[N][j][0] = (colSum[N][j][0] + colSum[N][j+1][0])%mod;
+        for(int i=N-1; i>=0; i--) rowSum[i][M][1] = (rowSum[i][M][1] + rowSum[i+1][M][1])%mod;
+        for(int j=M-1; j>=0; j--) colSum[N][j][1] = (colSum[N][j][1] + colSum[N][j+1][1])%mod;
+
 
 
         
@@ -54,58 +66,91 @@ int main(){
             if(a[i] == '+') nextN[i] = i;
         }
 
+        nextND[N]=N;
+        for(int i=N-1; i>=0; i--) {
+            nextND[i] = nextND[i+1];
+            if(a[i] != '+') nextND[i] = i;
+        }
+
         nextM[M]=M;
         for(int i=M-1; i>=0; i--) {
             nextM[i] = nextM[i+1];
             if(b[i] == '+') nextM[i] = i;
         }
-
-        cout << a << ' ' << b << endl;
-        for(int i=0; i<N; i++) cout << nextN[i] << ' ';
-        cout << endl;
-        for(int i=0; i<M; i++) cout << nextM[i] << ' ';
-        cout << endl;
-
-
+        
+        nextMD[M]=M;
+        for(int i=M-1; i>=0; i--) {
+            nextMD[i] = nextMD[i+1];
+            if(b[i] != '+') nextMD[i] = i;
+        }
 
         for(int i=N-1; i>=0; i--){
             for(int j=M-1; j>=0; j--){
-                ll ni = nextN[i];
-                ll nj = nextM[j];
-                if(ni == N && nj == M){
-                    dp[i][j] = 1;
-                }else{
-                    if(ni != N){
-                        dp[i][j] = (rowSum[ni+1][j]);
-                        if(nj != M) dp[i][j] = (dp[i][j] - rowSum[ni+1][nj+1])%mod;
+                ll idx=0;
+                if(a[i] == '+' || b[j] == '+'){
+                    ll na = nextND[i];
+                    ll nb = nextMD[j];
+                    if(a[i] == '+'){
+                        dp[i][j][idx] = (rowSum[i+1][nb][idx+1] - rowSum[na+1][nb][idx+1])%mod;
+                        if(b[j] == '+') dp[i][j][idx] = (dp[i][j][idx] + dp[i][nb][idx+1])%mod;
                     }
-                    if(nj != M){
-                        dp[i][j] = (dp[i][j] + colSum[i][nj+1]) %mod;
-                        if(ni != N) dp[i][j] = (dp[i][j] - colSum[ni+1][nj+1])%mod;
+                    if(b[j] == '+'){
+                        dp[i][j][idx] = (dp[i][j][idx] + colSum[na][j+1][idx+1] - colSum[na][nb+1][idx+1])%mod;
+                        if(a[i] == '+') dp[i][j][idx] = (dp[i][j][idx] + dp[na][j][idx+1])%mod;
                     }
+                    if(a[i] == '+' && b[j] == '+') dp[i][j][idx] = (dp[i][j][idx] - dp[na][nb][idx+1])%mod;
                 }
-                rowSum[i][j] = (dp[i][j] + rowSum[i][j] + rowSum[i][j+1])%mod;
-                colSum[i][j] = (dp[i][j] + colSum[i][j] + colSum[i+1][j])%mod;
+                rowSum[i][j][idx] = (dp[i][j][idx] + rowSum[i+1][j][idx])%mod; 
+                colSum[i][j][idx] = (dp[i][j][idx] + colSum[i][j+1][idx])%mod;
+
+                idx++;
+                if(a[i] != '+' || b[j] != '+'){
+                    ll na = nextN[i];
+                    ll nb = nextM[j];
+                    /*if(i == 1 && j == 0){
+                        cout << "WTF :" << endl;
+                        cout << na << ' ' << nb << endl;
+                    }*/
+                    if(a[i] != '+'){
+                        dp[i][j][idx] = (rowSum[i+1][nb][idx-1] - rowSum[na+1][nb][idx-1])%mod;
+                        if(b[j] != '+') dp[i][j][idx] = (dp[i][j][idx] + dp[i][nb][idx-1])%mod;
+                    }
+                    if(b[j] != '+'){
+                        dp[i][j][idx] = (dp[i][j][idx] + colSum[na][j+1][idx-1] - colSum[na][nb+1][idx-1])%mod;
+                        if(a[i] != '+') dp[i][j][idx] = (dp[i][j][idx] + dp[na][j][idx-1])%mod;
+                    }
+                    if(a[i] != '+' && b[j] != '+') dp[i][j][idx] = (dp[i][j][idx] - dp[na][nb][idx-1])%mod;
+                }
+                rowSum[i][j][idx] = (dp[i][j][idx] + rowSum[i+1][j][idx])%mod; 
+                colSum[i][j][idx] = (dp[i][j][idx] + colSum[i][j+1][idx])%mod;
             }
         }
 
+        /*
         for(int i=0; i<=N; i++){
-            for(int j=0; j<=M; j++) cout << dp[i][j] << ' ';
+            for(int j=0; j<=M; j++) cout << dp[i][j][0] << ' ';
             cout << endl;
         }
         cout << endl;
         for(int i=0; i<=N; i++){
-            for(int j=0; j<=M; j++) cout << rowSum[i][j] << ' ';
+            for(int j=0; j<=M; j++) cout << dp[i][j][1] << ' ';
             cout << endl;
         }
         cout << endl;
         for(int i=0; i<=N; i++){
-            for(int j=0; j<=M; j++) cout << colSum[i][j] << ' ';
+            for(int j=0; j<=M; j++) cout << rowSum[i][j][0] << ' ';
             cout << endl;
         }
+        cout << endl;
+        for(int i=0; i<=N; i++){
+            for(int j=0; j<=M; j++) cout << colSum[i][j][0] << ' ';
+            cout << endl;
+        }*/
 
-        dp[0][0] = ((dp[0][0]%mod) + mod)%mod;
-        cout << dp[0][0] << endl;
+        dp[0][0][0] = ((dp[0][0][0]%mod) + mod)%mod;
+        dp[0][0][1] = ((dp[0][0][1]%mod) + mod)%mod;
+        ll aa = (dp[0][0][0] + dp[0][0][1]) %mod;
+        cout << aa << '\n';
     }
 }
 
