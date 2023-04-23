@@ -27,6 +27,7 @@ String Hashing                  |                               |
 Trie                            |                               |
 SuffixArray                     |                               |
 SuffixAutomata                  |                               |
+Suffx tree                      |✔                              |✔                              
 
 
 
