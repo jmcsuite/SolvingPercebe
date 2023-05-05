@@ -47,7 +47,7 @@ namespace SuffixTree{
                 prev=0;
                 j++;
             }else{
-                char t = s[idx[to[node][s[pos]]] + n-1+pos];
+                char t = s[idx[to[node][s[pos]]] + n-1-pos];
                 if(s[n-1] == t){
                     next=false;
                     link[prev]=node;
