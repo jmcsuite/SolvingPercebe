@@ -32,6 +32,8 @@ struct segmentTree{
             st[i+n].second = i;
         }
         for(int i=n-1;i>0;i--){
+            st[i]=st[i*2];
+            if(i*2+1 >= 2*n) continue;
             st[i]=func(st[i*2],st[i*2+1]);
         }
     }
