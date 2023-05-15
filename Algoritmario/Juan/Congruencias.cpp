@@ -7,7 +7,6 @@ rp mygcd(ll a, ll b){
 
     ll bd = b/prev.first;
     ll ax=prev.second.second-prev.second.first*(b/a);
-    ax = (ax%bd+ bd)%bd;
     ll bx=(prev.first-a*ax)/b;
     
     rp ans={prev.first, {ax,
@@ -29,6 +28,7 @@ rp solve(ll c1, ll c2, ll b){
 }
 
 // Falta checar que el lcm no cause overflow
+// If WA, usar BigInteger
 pll sistema(vll& c, vll& b){
     pll ans(b[0], c[0]);
     for(size_t i=1; i<c.size(); i++){
@@ -37,7 +37,7 @@ pll sistema(vll& c, vll& b){
         rp sol = solve(pc, c[i],b[i]-pb);
         if(sol.first == -1) return {-1,-1};
 
-        ans.second = pc*c[i]/sol.first;
+        ans.second = pc*(c[i]/sol.first);
         ans.first += pc*sol.second.first;
         ans.first %= ans.second;
     }

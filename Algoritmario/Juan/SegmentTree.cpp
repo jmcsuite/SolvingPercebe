@@ -32,8 +32,6 @@ struct segmentTree{
             st[i+n].second = i;
         }
         for(int i=n-1;i>0;i--){
-            st[i]=st[i*2];
-            if(i*2+1 >= 2*n) continue;
             st[i]=func(st[i*2],st[i*2+1]);
         }
     }
@@ -42,8 +40,7 @@ struct segmentTree{
     // Value is replaced
     void update(int pos, str x){
         for(pos+=n,st[pos]=x,pos/=2; pos; pos/=2){
-            if(pos*2+1 >= 2*n) st[pos] = st[pos*2];
-            else st[pos] = func(st[pos*2],st[pos*2+1]);
+            st[pos] = func(st[pos*2],st[pos*2+1]);
         }
     }
 
