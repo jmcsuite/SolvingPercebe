@@ -6,36 +6,39 @@ using pll = pair<ll,ll>;
 using vpll = vector<pll>;
 
 const int maxn=1<<20;
+using bbi=ll;
 
 using rp = pair<ll,pll>;
-rp mygcd(ll a, ll b){
-    if(a==0) return {b,{0,1}};
-    if(b==0) return {a,{1,0}};
-    rp prev=mygcd(b%a,a);
-    ll ax=prev.second.second-prev.second.first*(b/a);
-    ll bx=(prev.first-a*ax)/b;
-    rp ans={prev.first, {ax,bx}};
-    return ans;
-}
-using bi = __int128;
 
-rp solve(ll c1, ll c2, ll b){
-    rp ans=mygcd(c1,c2);
-    if(b%ans.first != 0) return {-1,{-1,-1}};
-    ll bd = b/ans.first;
-    ll c2p= c2/ans.first;
-    bd%=c2p;
-    ans.second.first%=c2p;
+ rp mygcd(ll a, ll b){
+     if(a==0) return {b,{0,1}};
+     if(b==0) return {a,{1,0}};
+     rp prev=mygcd(b%a,a);
 
-    bi t1=ans.second.first;
-    bi t2=bd;
-    bi g1=c2p;
-    t2=(t1*t2)%g1;
+     ll ax=prev.second.second-prev.second.first*(b/a);
+     ll bx=prev.second.first;
 
-    
-    ans.second.first = t2;
-    return ans;
-}
+     rp ans={prev.first, {ax,
+         bx}};
+     return ans;
+ }
+
+ rp solve(ll c1, ll c2, ll b){
+     rp ans = mygcd(c1,c2);
+     if(b%ans.first != 0) return {-1,{-1,-1}};
+     ll bd = b/ans.first;
+     ll c2p = c2/ans.first;
+
+     ans.second.first%=c2p;
+     bd%=c2p;
+
+     ans.second.first = (__int128(bd)*__int128(ans.second.first))%c2p;
+     ans.second.first = (ans.second.first+c2p)%c2p;
+ 
+      ans.second.second = (b-ans.second.first*c1)/c2;
+      return ans;
+  }
+
 struct str{
     ll b;
     ll c;
@@ -65,10 +68,11 @@ struct segmentTree{
         if(tmp.first == -1) return {0,1,false};
         ll gc = b.c/tmp.first;
         gc = gc*a.c;
-        bi pi = bi(a.c)*bi(tmp.second.first);
-        bi ab = a.b;
-        bi ggc = gc;
-        bi tot = (pi%ggc + ab)%ggc;
+        //lcm
+        bbi pi = bbi(a.c)*bbi(tmp.second.first);
+        bbi ab = a.b;
+        bbi ggc = gc;
+        bbi tot = (pi%ggc + ab)%ggc;
         
         str ans(tot,gc);
         ans.sz=a.sz+b.sz;

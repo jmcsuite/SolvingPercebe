@@ -46,6 +46,8 @@ struct segmentTree{
     void update(ll l, ll r, ll x){
         ll l0 = l+n;
         ll r0 = r+n-1;
+        push(l0);
+        push(r0);
         for(l+=n,r+=n; l<r; l/=2, r/=2){
             if(l%2) apply(l++, x);
             if(r%2) apply(--r, x);
