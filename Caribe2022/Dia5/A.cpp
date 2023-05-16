@@ -1,3 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll = long long;
+using vll = vector<ll>;
+using pll = pair<ll,ll>;
+using vpll = vector<pll>;
+const long long mod=999999433;
+const long long base=31;
+
+const int maxn=100000;
+ll pw[maxn];
+ll acum[maxn];
+void build(){
+    pw[0]=1;
+    for(int i=1; i<maxn; i++) pw[i] = (pw[i-1]*base)%mod;
+    acum[0]=1;
+    for(int i=1; i<maxn; i++) acum[i] = (pw[i]+acum[i-1])%mod;
+}
+
 struct segmentTree{
     struct str{
         ll hash;
@@ -11,24 +30,29 @@ struct segmentTree{
     ll h;
     ll d[2*maxn];
     str merge(str& a, str& b){
-        // combine a,b
+        ll h = (a.hash+(b.hash*pw[a.sz])%mod)%mod;
+        ll s = a.sz+b.sz;
+        return {h,s};
     }
 
     str ifPropagated(ll idx){
         if(d[idx] == 0) return st[idx];
-        // value of st[idx] if you had propagated d[idx]
+        ll h = (d[idx]*acum[st[idx].sz-1])%mod;
+        return {h,st[idx].sz};
     }
 
     void apply(ll i, ll x){
-        // apply lazy x. Remember to update d[i], flag not propagated to children
+        d[i]=x;
+        st[i].hash = (x*acum[st[i].sz-1])%mod;
     }
 
     void build(vll& vl, ll sz){
         n=sz;
         h=64-__builtin_clzll(n);
-        for(int i=0; i<n; i++) st[i+n] = {};
+        for(int i=0; i<n; i++) st[i+n] = {vl[i]-'0'+1, 1};
         for(int i=n-1; i>0; i--) st[i]=merge(st[i*2],st[i*2+1]);
     }
+
 
     void bi(ll x){
         for(x/=2; x; x/=2){
@@ -63,7 +87,7 @@ struct segmentTree{
         bi(r0);
     }
 
-    //[l,r) 0-indexed
+    //[L,r) 0-indexed
     str query(ll l, ll r){
         push(l+n);
         push(r+n-1);
@@ -76,3 +100,27 @@ struct segmentTree{
         return merge(ansl,ansr);
     }
 };
+
+int main(){
+    build();
+    ll N,A,B; cin>>N>>A>>B;
+    ll M=A+B;
+    vll vl(N);
+    for(int i=0; i<N; i++){
+        char c; cin>>c; vl[i]=c;
+    }
+    segmentTree st; st.build(vl,N);
+    while(M--){
+        ll q,a,b,c; cin>>q>>a>>b>>c;
+        if(q==1){
+            c++;
+            st.update(a-1,b,c);
+        }else{
+            a--;
+            ll h1 = st.query(a,b-c).hash;
+            ll h2 = st.query(a+c,b).hash;
+            if(h1 == h2) cout << "YES\n";
+            else cout << "NO\n";
+        }
+    }
+}
