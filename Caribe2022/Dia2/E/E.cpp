@@ -1,6 +1,13 @@
+#include<bits/stdc++.h>
+using namespace std;
+using ll = long long;
+using vll = vector<ll>;
+using pll = pair<ll,ll>;
+using vpll = vector<pll>;
+
+const int maxn=200001;
 namespace suffix_tree{
     // nodes from [0, sz); //root is 0
-    // maxn = maxn+1 if string has special character
     const long long inf = 1e9;
     char s[maxn];
     int to[2*maxn][40];
@@ -10,10 +17,6 @@ namespace suffix_tree{
 
     int lid=0;
     int leaves[2*maxn];
-
-    void match(ll node, string& c, ll mc){
-        // match what now
-    }
 
     int make_node(int _pos, int _len){
         fpos[sz] = _pos;
@@ -73,6 +76,11 @@ namespace suffix_tree{
         len[0]=0;
     }
 
+    ll match_count[2*maxn];
+    void match(ll node, string& c, ll mc){
+        match_count[node]++;
+    }
+
     void search(string& c){
         ll node=0;
         ll sz=0;
@@ -87,5 +95,66 @@ namespace suffix_tree{
         }
         match(node,c,c.size());
     }
+
+    void prop(ll node, ll c){
+        match_count[node] += c;
+        for(int i=0; i<40; i++){
+            if(to[node][i] == 0) continue;
+            prop(to[node][i], match_count[node]);
+        }
+    }
+
+    void clear(){
+        for(int i=0; i<2*maxn; i++){
+            match_count[i]=0;
+            len[i]=fpos[i]=link[i]=leaves[i]=0;
+            for(int j=0; j<40; j++) to[i][j]=0;
+        }
+        node=pos=n=lid=0;
+        sz=1;
+    }
 }
+
+int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    string s; string copy_s;
+    cin>>s;
+    for(size_t i=0; i<s.size(); i++) s[i]-='a';
+    copy_s = s;
+    s.push_back(27);
+    ll N; cin>>N;
+    vector<string> vs(N); for(int i=0; i<N; i++) cin>>vs[i];
+    for(int i=0; i<N; i++){
+        for(size_t j=0; j<vs[i].size(); j++) vs[i][j]-='a';
+    }
+
+    suffix_tree::add_string(s);
+    for(int i=0; i<N; i++) suffix_tree::search(vs[i]);
+    suffix_tree::prop(0,0);
+
+    vll dp(s.size());
+    for(size_t i=0; i<s.size(); i++){
+        dp[i] = suffix_tree::match_count[suffix_tree::leaves[i]];
+    }
+
+    string t = copy_s;
+    reverse(t.begin(), t.end()); t.push_back(27);
+    for(int i=0; i<N; i++) reverse(vs[i].begin(), vs[i].end());
+    suffix_tree::clear();
+    suffix_tree::add_string(t);
+    for(int i=0; i<N; i++) suffix_tree::search(vs[i]);
+    suffix_tree::prop(0,0);
+
+    ll ans = 0;
+    for(size_t i=0; i<t.size(); i++){
+        ll x = suffix_tree::match_count[suffix_tree::leaves[i]];
+        ans = (ans + x*dp[s.size() - 1 - i]);
+    }
+    cout << ans << '\n';
+}
+         
+
+    
+
 
