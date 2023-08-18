@@ -14,7 +14,15 @@ TMX-Dia7                        |                               |               
 TMX-Dia8                        |                               |                           |
 TMX-Dia9                        |                               |                           |
 TMX-Dia10                       |                               |                           |
-Worlds2022                      |✔                              |                           |
+Worlds2022                      |                               |                           |
+Caribean no. 1                  |                               |                           |
+Caribean no. 2                  |                               |                           |
+Caribean no. 3                  |                               |                           |
+Caribean no. 4                  |                               |                           |
+Caribean no. 5                  |                               |                           |
+Caribean exploratory            |                               |                           |
+GPMexico-2023-1                 |                               |                           |
+GPMexico-2023-2                 |                               |                           |
 
 
 Example                         |                               |                           |

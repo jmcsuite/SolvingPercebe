@@ -1,114 +1,170 @@
 #include<bits/stdc++.h>
 using namespace std;
-using ll = long long;
+using ll = int;
 using vll = vector<ll>;
 using pll = pair<ll,ll>;
 using vpll = vector<pll>;
 
-const int maxn=200001;
-const long long mod = 1000000007;
+const int maxn=100001;
+namespace suffix_tree{
+    // nodes from [0, sz); //root is 0
+    // maxn = maxn+1 if string has special character
+    const long long inf = 1e9;
+    char s[maxn];
+    int to[2*maxn][28];
+    int len[2*maxn], fpos[2*maxn], link[2*maxn];
+    int node=0, pos=0;
+    int sz=1, n=0;
 
-namespace aho{
-    vector<string> vs;
-    ll val[maxn];
-    ll smatch[maxn];
+    int lid=0;
 
-    ll p[maxn];
-    ll pChar[maxn];
-    map<ll,ll> vadj[maxn];
+    vpll matches[2*maxn];
+    void match(ll node, string& c, ll mc, ll val){
+        matches[node].push_back({mc,val});
+        // match what now
+    }
 
-    ll nCount=1;
-    const long long root=0;
+    int make_node(int _pos, int _len){
+        fpos[sz] = _pos;
+        len[sz] = _len;
+        return sz++;
+    }
 
-    ll dp[maxn]; 
+    void go_edge(){
+        while(pos>len[to[node][(int)s[n-pos]]]){
+            node = to[node][(int)s[n-pos]];
+            pos -= len[node];
+        }
+    }
 
-    ll fLink[maxn];
-    ll oLink[maxn];
-
-    void addString(string& s,ll id){
-        ll i=root;
-        for(char c: s){
-            if(vadj[i].find(c) != vadj[i].end()){
-                i = vadj[i][c];
-                continue;
+    void add_letter(int c){
+        s[n++] = c;
+        pos++;
+        int last=0;
+        while(pos>0){
+            go_edge();
+            int edge = s[n-pos];
+            int &v = to[node][edge];
+            int t = s[fpos[v] + pos - 1];
+            if(v == 0){
+                v = make_node(n-pos, inf);
+                link[last]=node;
+                last=0;
             }
-            ll node = nCount++;
-            p[node]=i;
-            pChar[node]=c;
-            vadj[i][c]=node;
-            i=node;
-        }
-        smatch[i]=id;
-        val[i]++; 
-    }
-
-
-    void build(){
-        for(int i=0; i<maxn; i++) smatch[i]=-1;
-        pChar[root]=-1;
-        ll id=0;
-
-        for(string& s: vs) addString(s,id++);
-        queue<ll> q; q.push(root);
-
-        while(!q.empty()){
-            ll x=q.front(); q.pop();
-            for(pll yy: vadj[x]) q.push(yy.second);
-
-            ll nx = fLink[p[x]];
-            ll c = pChar[x];
-            while(nx != root && vadj[nx].find(c) == vadj[nx].end()) nx = fLink[nx];
-
-            if(vadj[nx].find(c) == vadj[nx].end() || vadj[nx][c] == x) fLink[x]=root;
-            else fLink[x]=vadj[nx][c];
-
-            if(smatch[fLink[x]] != -1) oLink[x] = fLink[x];
-            else oLink[x] = oLink[fLink[x]];
-
-
-        }
-    }
-
-    void match(ll node, ll pos){
-        ll sid = smatch[node];
-        ll sz = vs[sid].size();
-        if(pos-sz < 0) dp[pos] = val[node];
-        else dp[pos] = (dp[pos]+dp[pos-sz]*val[node])%mod;
-    }
-
-    void aho(string& T){
-        ll x=root;
-        for(int c=0; c<(ll)T.size(); c++){
-            while(x != root && vadj[x].find(T[c]) == vadj[x].end()) x = fLink[x];
-            if(vadj[x].find(T[c]) == vadj[x].end()) continue;
-            x = vadj[x][T[c]];
-            if(smatch[x] != -1) match(x,c);
-            ll mx = oLink[x];
-            while(mx != root){
-                match(mx,c);
-                mx = oLink[mx];
+            else if(t == c){
+                link[last]=node;
+                return;
             }
+            else{
+                int u = make_node(fpos[v],pos-1);
+                to[u][c] = make_node(n-1,inf);
+
+                to[u][t] = v;
+                fpos[v] += pos-1;
+                len[v] -= pos-1;
+                v=u;
+                link[last] = u;
+                last = u;
+            }
+            if(node == 0) pos--;
+            else node=link[node];
         }
+    }
+
+    void add_string(string& x){
+        node=0; pos=0;
+        len[0]=inf;
+        for(char c: x) add_letter(c);
+        len[0]=0;
+    }
+
+    void search(string& c, ll val){
+        ll node=0;
+        ll sz=0;
+        for(size_t i=0; i<c.size(); i++){
+            sz++;
+            if(len[node] < sz){
+                node = to[node][(int)c[i]];
+                sz=1;
+            }
+            ll t = s[fpos[node]+sz-1];
+            if(node == 0 || t != c[i]) return;
+        }
+        match(node,c,c.size(),val);
+    }
+
+    ll depth[2*maxn];
+    vpll vadj[maxn];
+    void prop(ll x, vpll& tmp, ll d){
+        bool se=true;
+        depth[x] = d+len[x];
+        for(pll y: matches[x]) tmp.push_back(y);
+        for(int i=0; i<28; i++){
+            if(to[x][i] == 0) continue;
+            se=false;
+            prop(to[x][i],tmp,depth[x]);
+        }
+        if(se){
+            len[x] = n-fpos[x];
+            depth[x]=d+len[x];
+            ll leafPos = n-depth[x];
+            for(pll y: tmp) vadj[leafPos].push_back(y);
+        }
+        tmp.erase(tmp.end()-matches[x].size(), tmp.end());
     }
 }
 
+const long long modh = 999999433;
+ll hsh(string& s){
+    long long pow=31;
+    long long h=0;
+    for(char c: s){
+        h = (h*pow)%modh;
+        h = (h + c + 1);
+    }
+    return h;
+}
+
+
+const long long mod = 1000000007;
 int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
-    ll M; cin>>M;
-    for(int i=0; i<M; i++){
-        string s; cin>>s;
+    map<ll,ll> mp;
+    vector<string> vs;
+    ll N; cin>>N;
+    for(int i=0; i<N; i++){
+        string s;
+        cin>>s;
         for(size_t j=0; j<s.size(); j++) s[j]-='a';
-        aho::vs.push_back(s);
+        ll h = hsh(s);
+        mp[h]++;
+        if(mp[h] == 1) vs.push_back(s);
     }
 
     string t; cin>>t;
     for(size_t j=0; j<t.size(); j++) t[j]-='a';
-    aho::build();
-    aho::aho(t);
-    cout << aho::dp[t.size()-1] << '\n';
+    t.push_back(27);
+
+    suffix_tree::add_string(t);
+    for(string& s: vs){
+        ll h = hsh(s);
+        ll c = mp[h];
+        suffix_tree::search(s, c);
+    }
+    vpll tmp;
+    suffix_tree::prop(0,tmp,0);
+    vector<long long> dp(t.size());
+    dp[t.size() - 1]=1;
+    for(int i=t.size()-2; i>=0; i--){
+        for(pll yy: suffix_tree::vadj[i]){
+            dp[i] = dp[i] + (dp[yy.first+i]*(long long)yy.second)%mod;
+            dp[i] = dp[i]%mod;
+        }
+    }
+    cout << dp[0] << '\n';
 }
 
 
 
-    
+
