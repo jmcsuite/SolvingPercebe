@@ -1,0 +1,19 @@
+--- Problema A: Aliases ---
+El problema tiene se puede solucionar de la sugiuente manera:
+1.- Lees todo el input para generar los aliases y los guardas en un map.
+2.- Iteras por el map. Si el elemento aparece solamente una vez, entonces es unico.
+
+Errores comunes:
+- En lugar de contar los unique, contar los 'distinct' es decir, cuantos aliases hay. 
+- Este no es un error, pero es una inteligente observacion. La complejidad de insertar N strings cuyo tamanio suma M caracteres es log[N] * O[M]. Esto se puede probar ya que en una operacion de insertar una string de tamanio K, la complejidad es a lo mas log[N]*O[K], entonces la complejidad maxima es log[N] * La suma de los K , osea M
+- Otra cosa importante es como iterar el mapa. Un 'for(auto& x : mp)' es suficiente para iterar el mapa.
+
+
+
+--- Problema B: Bucket Storing ---
+El problema basta con calcular el techo de (N*K) / L. Para que sea techo se agrega una linea mas.
+
+Error comun:
+No considerar que el resultado es el techo
+
+ 

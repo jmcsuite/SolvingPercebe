@@ -15,7 +15,9 @@ int main(){
     map_t mp;
     mp.insert(3);
     mp.insert(5);
-    mp.order_of_key(4); // devolveria 1
+    mp.order_of_key(3); // devuelve 0;
+    mp.order_of_key(4); // devolveria 1;
     mp.find_by_order(2); // devolveria el iterador al 5 (es un puntero);
+    mp.find_by_order(1); // devuelve el iterador al 5. (osea es 0 ordering);
 }
 
