@@ -6,14 +6,28 @@ El problema tiene se puede solucionar de la sugiuente manera:
 Errores comunes:
 - En lugar de contar los unique, contar los 'distinct' es decir, cuantos aliases hay. 
 - Este no es un error, pero es una inteligente observacion. La complejidad de insertar N strings cuyo tamanio suma M caracteres es log[N] * O[M]. Esto se puede probar ya que en una operacion de insertar una string de tamanio K, la complejidad es a lo mas log[N]*O[K], entonces la complejidad maxima es log[N] * La suma de los K , osea M
-- Otra cosa importante es como iterar el mapa. Un 'for(auto& x : mp)' es suficiente para iterar el mapa.
+- Otra cosa de aprendizaje es la forma de iterar un map, con c++11, es lo mismo que crear un iterado.
+
+
+-- Problema B: BucketStoring ---
+El problema se soluciona calculando N*K/L techo. 
+
+
+--- Problema D: Dynamic Collection ---
+En el problema hay que calcular la frecuencia de elementos entre un rango [a,b].
+
+Hay un problema clasico, dada varias queries para editar un array,  dar la frecuencia de un rango [a,b].
+Para solucionar este problema con elementos hasta 1e9, se necesita hacer compresion + segment tree.
+Tambien se puede hacer un order_statistics tree.
+
+Sin embargo, son 1e6 elementos, por lo que lo mencionado anteriormente es demasiado lento.
+Lo que hay que darnos cuenta, es que los updates que se hacen, son siempre cambiando un elemento por el immediato menor.
+Gracias a eso, podemos mantener un array ordenado, lo unico que necesitamos son dos busquedas binarias.
+La primer busqueda binaria encuentra el primer elemento mayor o igual que k;
+La segunda busqueda binaria encuentra el ultimo elemento menor o igual que k;
+
+Errores:
+No usar fast io, 1e6 elementos es demasiado lento de leer con stdin
 
 
 
---- Problema B: Bucket Storing ---
-El problema basta con calcular el techo de (N*K) / L. Para que sea techo se agrega una linea mas.
-
-Error comun:
-No considerar que el resultado es el techo
-
- 
