@@ -22,10 +22,10 @@ Bookmarks=huronOS^https://huronos.org|
 Wallpaper=default
 
 [Contest]
-AllowedWebsites=all
+AllowedWebsites=boca.icpcmexico.org|score.icpcmexico.org|icpcmexico.org|
 AllowUsbStorage=false
 AvailableSoftware=internet/chromium|internet/crow|internet/firefox|langs/g++|langs/gcc|langs/javac|langs/kotlinc|langs/pypy3|langs/python3|tools/konsole|programming/atom|programming/codeblocks|programming/eclipse|programming/emacs|programming/geany|programming/gedit|programming/gvim|programming/intellij|programming/kate|programming/kdevelop|programming/pycharm|programming/sublime|programming/vim|programming/vscode|programming/vsc-clangd|programming/vsc-cpp-compile-run|programming/vsc-cpptools|programming/vsc-intellij-idea-keybindings|programming/vsc-vscodevim|programming/clion|
-Bookmarks={Contest^https://codeforces.com/gym/104466}|
+Bookmarks={Contest^https://boca.icpcmexico.org}|
 Wallpaper=https://directives.huronos.org/external/upbonaterra/gpmx2023_contest_mode.png
 WallpaperSha256=824d8560d35ec070589a5b72f2da85aff38203a7f6b1aee8bae7900c608d4369
 
@@ -34,6 +34,5 @@ WallpaperSha256=824d8560d35ec070589a5b72f2da85aff38203a7f6b1aee8bae7900c608d4369
 [Contest-Times]
 2023-08-29T05:30:00 2023-08-29T05:35:00
 2023-08-29T15:43:00 2023-08-29T16:15:00
-2023-08-31T09:30:00 2023-08-31T14:35:00
 2023-09-02T07:00:00 2023-09-02T09:05:00
 2023-09-02T10:58:00 2023-09-02T16:05:00
