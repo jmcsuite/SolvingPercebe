@@ -39,6 +39,8 @@ using q = pair<ll,pll>;
 
 
 int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
     ll N, Q; cin>>N>>Q;
     vll vl(N); for(int i=0; i<N; i++) cin>>vl[i];
 
