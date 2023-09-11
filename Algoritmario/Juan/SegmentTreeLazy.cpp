@@ -17,10 +17,12 @@ struct segmentTree{
     str ifPropagated(ll idx){
         if(d[idx] == 0) return st[idx];
         // value of st[idx] if you had propagated d[idx]
+        // If propagated is alwas asked after st[idx] = merge(st[idx*2], st[idx*2 + 1]);
     }
 
     void apply(ll i, ll x){
         // apply lazy x. Remember to update d[i], flag not propagated to children
+        // apply directly to st[i], that is the value used in queries
     }
 
     void build(vll& vl, ll sz){

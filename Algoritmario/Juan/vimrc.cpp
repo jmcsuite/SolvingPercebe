@@ -13,3 +13,4 @@ inoremap hnh <esc>
 onoremap hnh <esc>
 vnoremap hnh <esc>
 tnoremap hnh <C-\><C-n> 
+nnoremap hnh :Ex<cr> 
