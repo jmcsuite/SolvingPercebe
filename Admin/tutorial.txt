@@ -1,0 +1,43 @@
+!! Sobre el eserver con directivas
+
+ssh upbonaterra@huronos.org
+Wr!zRbHc6vQNytfpoD$zn#c!EFNwyQ
+ddPueden cambiar el pass si quieren
+En cuanto entres estarás en tu carpeta home, ahí veras un directorio que se llama public_html
+Todo lo que pongas ahí esta con un symlink a 
+directives.huronos.org/external/upbonaterra/
+Entonces si tu pones e.g. 
+/home/upbonaterra/directives.hdf esto se verá como 
+https://directives.huronos.org/external/upbonaterra/directives.hdf
+Para subir archivos lo puedes hacer con scp
+
+
+!! Sobre bootear en la up
+- Presiona supr y f2 al mismo tiempo para entrar al bios.
+- Bootea al uefi de HuronOS
+- Tienes que hacer configuracion manual del ipv4, la configuracion es 
+
+Maquina 1: 
+ipv4 172.23.110.99
+Mascara 255.255.0.0
+Gateway 172.23.110.254
+
+Maquina 2: 
+ipv4 172.23.110.100
+255.255.0.0
+172.23.110.254
+
+Maquina 3: etc 
+las ips van desde el 172.23.110.99 hasta el 172.23.110.108, en el salon 
+de enmedio de TI.
+
+Si alguien prende algun windows en ese salon, las ips van a tener conflicto
+y no vas a tener internet.
+
+
+!! Sobre HuronOS
+Esta toda la documentacion de Huron aqui: http://huronos.org/docs/usage/directives/firewall/omegaup
+checa lo del firewall de omegaup, esta muy especifico, si falla reportalo en discord.
+
+El server es de directivas que usamos nos lo presta una chava llamada quetzal, la desarrolladora de HuronOS
+y oficialmente se lo presta a la UP. 
