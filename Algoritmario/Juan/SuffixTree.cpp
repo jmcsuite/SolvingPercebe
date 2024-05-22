@@ -65,11 +65,10 @@ namespace suffix_tree{
     }
 
     void add_string(string& x){
-        ll i=n;
         node=0; pos=0;
         len[0]=inf;
         for(char c: x) add_letter(c);
-        for(int j=i; j<n; j++) len[leaves[j]] = n-fpos[leaves[j]];
+        for(int j=1; j<n; j++) len[leaves[j]] = n-fpos[leaves[j]];
         len[0]=0;
     }
 
