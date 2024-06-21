@@ -1,0 +1,51 @@
+N = 2
+
+12
+21
+
+int diferencias[19] {-9, -8, -7, -6, ..... }
+int cantidad[19] = {1, 2, 3} 
+
+long long contar(ll digito, ll suma) {
+// itero cada posible nuevo digito de A, 
+// itero cada digito de B.
+// me cersioro de no usar el mismo
+
+// cada iteracion, calcula la nueva suma
+if (digito == 0) {
+   if (suma != 0) return 0;
+   else return 1;
+}
+
+if (digito == 1) {
+    for (int i = 1; i <= 9; i++) {
+        for (int j = 1; j <= 9; j++) {
+            if(i == j) continue;
+            ans = ans + contar(digito-1, suma + (i-j));
+        }
+    }
+    return 0;
+}
+/*
+for (int i = 0; i <= 9; i++) {
+  for (int j = 0; j <= 9; j++) {
+    if(i == j) continue;
+    ans = ans + contar(digito-1, suma + (i-j));
+  }
+}*/
+for (int i = 0; i < 19; i++) {
+    ans = ans + contar(digito-1, suma + dif[i])*cantidad[i];
+}
+
+}
+
+// digitos = 800
+// suma = 800 * 10
+// total = 6400000 = 6 * 1e6 
+// total_tiempo = 81 * 6 * 1e6 = 4 * 1e8
+
+
+// [0, 1] , [0, 2] ,[ 0, 3], etc.....
+// [1, 2], [1, 3], [1, 4], etc.....a
+// [0, 9] -> -9
+// [9, 0] -> 9

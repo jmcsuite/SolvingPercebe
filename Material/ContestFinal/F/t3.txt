@@ -1,0 +1,3 @@
+t1 -> t2 -> t3 -> t4
+// si t1 siempre gana moviendose a turno 2. 
+// entonces t2 siempre pierde

@@ -1,0 +1,26 @@
+3 2 // Vida = 3
+    // 2 ataques
+
+// ataques_danio
+[2, 1]
+// ataques, tiempo de recarga
+[2, 1]  
+
+// respuesta = 1
+
+
+// Caso: 2
+// Vida = 6
+// 2 ataques
+
+// ataques_danio
+[2, 1]
+// ataques, tiempo de recarga
+[2, 1]  
+
+// respuesta = 1
+
+
+Turno 1: cooldowns[0, 0], Vida = 3, cooldowns[2, 1]
+Turno 2: cooldowns[1, 0], Vida = 2, cooldowns[1, 1];
+Turno 3: cooldowns[0, 0], Vida = -1, cooldowns[1, 1];
