@@ -10,7 +10,7 @@ ContestConfig=true
 AllowedWebsites=all
 AllowUsbStorage=true
 AvailableSoftware=internet/chromium|internet/crow|internet/firefox|langs/g++|langs/gcc|langs/javac|langs/kotlinc|langs/pypy3|langs/python3|tools/konsole|programming/atom|programming/codeblocks|programming/eclipse|programming/emacs|programming/geany|programming/gedit|programming/gvim|programming/intellij|programming/kate|programming/kdevelop|programming/pycharm|programming/sublime|programming/vim|programming/vscode|programming/vsc-clangd|programming/vsc-cpp-compile-run|programming/vsc-cpptools|programming/vsc-intellij-idea-keybindings|programming/vsc-vscodevim|programming/clion|
-Bookmarks={Contest^https://boca.icpcmexico.org}|
+Bookmarks={Contest^https://boca.icpcmexico.org}|{Impresiones^http://disfrutaveracruz.com}
 Wallpaper=https://directives.huronos.org/external/upbonaterra/gpmx2023_always_mode.png
 WallpaperSha256=c382c20791695176be47257ec924c9df39e40534d4ac02fb23c4f3c823334fd8
 
@@ -22,18 +22,18 @@ Bookmarks=huronOS^https://huronos.org|
 Wallpaper=default
 
 [Contest]
-AllowedWebsites=all
+AllowedWebsites=global.naquadah.com.br|
 AllowUsbStorage=false
-AvailableSoftware=internet/chromium|internet/crow|internet/firefox|langs/g++|langs/gcc|langs/javac|langs/kotlinc|langs/pypy3|langs/python3|tools/konsole|programming/atom|programming/codeblocks|programming/eclipse|programming/emacs|programming/geany|programming/gedit|programming/gvim|programming/intellij|programming/kate|programming/kdevelop|programming/pycharm|programming/sublime|programming/vim|programming/vscode|programming/vsc-clangd|programming/vsc-cpp-compile-run|programming/vsc-cpptools|programming/vsc-intellij-idea-keybindings|programming/vsc-vscodevim|programming/clion|
-Bookmarks={Contest^https://boca.icpcmexico.org}|
-Wallpaper=https://directives.huronos.org/external/upbonaterra/gpmx2023_contest_mode.png
-WallpaperSha256=824d8560d35ec070589a5b72f2da85aff38203a7f6b1aee8bae7900c608d4369
+AvailableSoftware=internet/chromium|internet/crow|internet/firefox|langs/g++|langs/gcc|langs/javac|langs/kotlinc|langs/pypy3|langs/python3|tools/konsole|programming/atom|programming/codeblocks|programming/eclipse|programming/emacs|programming/geany|programming/gedit|programming/gvim|programming/intellij|programming/kate|programming/kdevelop|programming/pycharm|programming/sublime|programming/vim|programming/vscode|programming/vsc-clangd|programming/vsc-cpp-compile-run|programming/vsc-cpptools|programming/clion|
+Bookmarks={Contest^https://global.naquadah.com.br/boca}|{Impresiones^http://disfrutaveracruz.com}|{ImpresionesLogin^http://172.111.182.252}|
+Wallpaper=https://directives.huronos.org/external/upbonaterra/Wallpaper_UP.png
+WallpaperSha256=87e4e5e9919b886bca3c528a7a05a65e92fcbe429dcce9270124d127abf2bcba
 
 [Event-Times]
 
 [Contest-Times]
-2023-08-29T05:30:00 2023-08-29T05:35:00
-2023-08-29T15:43:00 2023-08-29T16:15:00
+2023-09-01T07:00:00 2023-09-01T17:59:00
+2023-09-01T20:00:00 2023-09-01T21:40:00
 2023-09-02T07:00:00 2023-09-02T09:05:00
 2023-09-02T10:58:00 2023-09-02T16:05:00
-2023-10-05T16:58:00 2023-10-05T21:01:00
+2024-10-17T08:58:00 2024-10-17T14:02:00

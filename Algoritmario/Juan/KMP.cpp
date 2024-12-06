@@ -2,7 +2,6 @@ vector<int> kmp(string& s){
     int n = s.size();
     vector<int> vs(n);
     //vs[i] = kmp que acaba en la posicion i
-    //en otras palabras, tiene tamanio i+1;
     for(int i=1; i<n; i++){
         int j = vs[i-1]; // j = aproximacion anterior
         while(j!=0 && s[i] != s[j]){
