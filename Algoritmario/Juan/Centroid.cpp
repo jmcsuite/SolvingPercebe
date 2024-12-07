@@ -3,20 +3,19 @@ namespace centroid {
     ll vis[maxn];
     ll p[maxn];
     ll root;
-    ll ans[maxn];
 
-    void calc(ll x, ll p) {
+    void calc(ll x, ll u) {
         sz[x]=1;
         for (ll y: vadj[x]) {
-            if (y == p || vis[y]) continue;
+            if (y == u || vis[y]) continue;
             calc(y,x);
             sz[x] += sz[y];
         }
     }
 
-    ll find(ll x, ll p, ll n) {
+    ll find(ll x, ll u, ll n) {
         for (ll y: vadj[x]) {
-            if (y == p || vis[y]) continue;
+            if (y == u || vis[y]) continue;
             if (sz[y] > n) return find(y,x,n);
         }
         return x;
