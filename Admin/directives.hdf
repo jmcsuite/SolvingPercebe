@@ -1,6 +1,6 @@
 [Global]
 TimeZone=America/Mexico_City
-ConfigExpirationTime=2024-12-29T12:00:00
+ConfigExpirationTime=2025-12-29T12:00:00
 AvailableKeyboardLayouts=latam|us|
 DefaultKeyboardLayout=latam
 EventConfig=false
@@ -9,7 +9,7 @@ ContestConfig=true
 [Always]
 AllowedWebsites=all
 AllowUsbStorage=true
-AvailableSoftware=internet/chromium|internet/crow|internet/firefox|langs/g++|langs/gcc|langs/javac|langs/kotlinc|langs/pypy3|langs/python3|tools/konsole|programming/atom|programming/codeblocks|programming/eclipse|programming/emacs|programming/geany|programming/gedit|programming/gvim|programming/intellij|programming/kate|programming/kdevelop|programming/pycharm|programming/sublime|programming/vim|programming/vscode|programming/vsc-clangd|programming/vsc-cpp-compile-run|programming/vsc-cpptools|programming/vsc-intellij-idea-keybindings|programming/vsc-vscodevim|programming/clion|
+AvailableSoftware=internet/chromium|internet/crow|internet/firefox|langs/g++|langs/gcc|langs/javac|langs/kotlinc|langs/pypy3|langs/python3|tools/konsole|programming/atom|programming/codeblocks|programming/eclipse|programming/emacs|programming/geany|programming/gedit|programming/gvim|programming/intellij|programming/kate|programming/kdevelop|programming/pycharm|programming/sublime|programming/vim|programming/vscode|programming/vsc-clangd|programming/vsc-cpp-compile-run|programming/vsc-cpptools|programming/vsc-intellij-idea-keybindings|programming/vsc-vscodevim|programming/clion|debuggers/gdb|
 Bookmarks=huronOS^https://huronos.org|
 Wallpaper=https://directives.huronos.org/external/upbonaterra/Wallpaper_UP.png
 WallpaperSha256=87e4e5e9919b886bca3c528a7a05a65e92fcbe429dcce9270124d127abf2bcba
@@ -32,6 +32,5 @@ WallpaperSha256=3ed35189cb8363632f5ee1f309a32a0fc5c85961ea08ff45b9171b9a428a472b
 [Event-Times]
 
 [Contest-Times]
-2024-11-15T14:55:00 2024-11-15T20:03:00
-2024-11-22T14:55:00 2024-11-22T20:02:00
 2024-11-26T08:55:00 2024-11-26T15:02:00
+2025-01-09T08:55:00 2025-01-09T15:02:00
