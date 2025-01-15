@@ -1,5 +1,5 @@
 namespace lca{
-    const int maxPow=20;
+    const int maxPow=20; // 2**20 > 10**6
     const int maxn=1e5;
     ll vl[maxn];
     vll vadj[maxn];
@@ -20,12 +20,12 @@ namespace lca{
     }
 
     void buildPow() {
-        for(int i=0; i<(2*N-1); i++) dp[i][0]=depth[i];
+        for(int i=0; i<t; i++) dp[i][0]=depth[i];
         for(int j=1; j<maxPow; j++) {
-            for (int i=0; i<(2*N-1); i++) {
+            for (int i=0; i<t; i++) {
                 dp[i][j] = dp[i][j-1];
                 int k = i+(1<<(j-1));
-                if(k >= 2*N-1) continue;
+                if(k >= t) continue;
                 dp[i][j]=min(dp[i][j], dp[k][j-1]);
             }
         }
