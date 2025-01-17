@@ -7,7 +7,7 @@ struct cht {
   // gets minimum;
   // increasing queries
   // non-increasing (decreasing) slopes
-  deque<slope> dq;
+  list<slope> dq;
 
   // does b intersect base before a?
   bool remove(slope base, slope a, slope b) {
