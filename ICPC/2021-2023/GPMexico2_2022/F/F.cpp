@@ -30,7 +30,15 @@ int main(){
                 //double ik = dis(pa[i], pb[i], pa[k], pb[k]);
 
 
-                ll aaaa = pa[i]*(pb[j]-pb[k]) + pa[j]*(pb[k]-pb[i])+pa[k]*(pb[i]-pb[j]);
+                //ll aaaa = pa[i]*(pb[j]-pb[k]) + pa[j]*(pb[k]-pb[i])+pa[k]*(pb[i]-pb[j]);
+                ll x = pa[j] - pa[i];
+                ll y = pb[j] - pb[i];
+
+                ll a = pa[k] - pa[i];
+                ll b = pb[k] - pb[i];
+
+                ll aaaa = x*b - a*y;
+
                 
                 if(aaaa == 0){
                     //cout << i << ' ' << j << ' ' << k << endl;

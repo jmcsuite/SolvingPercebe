@@ -33,6 +33,8 @@ struct BigInteger {
 
   BigInteger operator*(const BigInteger &b) const {
     BigInteger res = BigInteger();
+    if (digits.size() == 1 && digits[0] == 0) return {0};
+    if (b.digits.size() == 1 && b.digits[0] == 0) return {0};
     res.digits = vector<ll>(b.digits.size() + digits.size() - 1, 0);
     for (size_t i = 0; i < digits.size(); i++)
       for (size_t j = 0; j < b.digits.size(); j++)
