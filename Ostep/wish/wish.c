@@ -17,6 +17,11 @@ void process_line(char *buffer, size_t sz) {
     // We can add tab to the delimiter list.
     // We can simply skip emtpy strings, (idk how a user would input a 
     // delimiter character (atm).
+
+    //TODO(next steps): // let's execute something from PATH using this chars 
+    //  First wi would need to check path.
+
+    // TODO(interactive mode isn't printing the wish prompt!!);
 }
 
 void wish(FILE *f) {
