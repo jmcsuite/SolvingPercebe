@@ -1,14 +1,17 @@
+// wish.c
+// command line shell.
+#include "executor.h"
+
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define PATH "/bin/ls"
 
 bool batch_mode = false;
 
 void process_line(char *buffer, size_t sz) {
-    int args_sz = 1;
+    int args_sz = 2;
     char **args = malloc(args_sz * sizeof(char *));
     if (args == NULL) {
         fprintf(stderr, "wish: malloc error %s", strerror(errno));
@@ -16,12 +19,15 @@ void process_line(char *buffer, size_t sz) {
     }
     for (size_t i = 0; i < args_sz; i++) args[i] = NULL;
     int argc = 0;
+
+    // Bad stuff happens if null character is the separating character
+    // We can add tab to the delimiter list.
     while (args[argc] = strsep(&buffer, " \t\n"), args[argc] != NULL) {
         if (args[argc][0] == '\0') {
             continue;
         }
         argc++;
-        if (argc == args_sz) {
+        if (argc+1 == args_sz) {
             args_sz = args_sz * 2;
             args = realloc(args, args_sz * sizeof(char *));
             if (args == NULL) {
@@ -33,27 +39,25 @@ void process_line(char *buffer, size_t sz) {
             }
         }
     }
-    for (int i = 0; i < argc; i++) {
-        printf("jmarquina: %s", args[i]);
-    }
-    // TODO(notes): // strsep, read the manulal, it overwrites the first char
-    // that is a sep character with null, and sets buffer to point to the next 
-    // character. Bad stuff happens if null character is the separating character
-    // We can add tab to the delimiter list.
-    // We can simply skip emtpy strings, (idk how a user would input a 
-    // delimiter character (atm).
+    execute(argc, args);
+    free(args);
 
     //TODO(next steps): // let's execute something from PATH using this chars 
     //  First wi would need to check path.
-
-    // TODO(interactive mode isn't printing the wish prompt!!);
 }
 
 void wish(FILE *f) {
     char *buffer = NULL;
     size_t size = 0;
+    // TODO : maybe in batch job print a nl?
+    if (!batch_mode) {
+        printf("wish> ");
+    }
     while (getline(&buffer, &size, f) != -1) {
         process_line(buffer, size); 
+        if (!batch_mode) {
+            printf("wish> ");
+        }
     }
     free(buffer);
     exit(0);
