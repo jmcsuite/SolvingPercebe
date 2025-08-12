@@ -1,3 +1,4 @@
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,9 +8,33 @@
 bool batch_mode = false;
 
 void process_line(char *buffer, size_t sz) {
-    char *line = NULL;
-    while (line = strsep(&buffer, " "), line != NULL) {
-        printf("jmarquina: %s\n", line);
+    int args_sz = 1;
+    char **args = malloc(args_sz * sizeof(char *));
+    if (args == NULL) {
+        fprintf(stderr, "wish: malloc error %s", strerror(errno));
+        exit(1);
+    }
+    for (size_t i = 0; i < args_sz; i++) args[i] = NULL;
+    int argc = 0;
+    while (args[argc] = strsep(&buffer, " \t\n"), args[argc] != NULL) {
+        if (args[argc][0] == '\0') {
+            continue;
+        }
+        argc++;
+        if (argc == args_sz) {
+            args_sz = args_sz * 2;
+            args = realloc(args, args_sz * sizeof(char *));
+            if (args == NULL) {
+                fprintf(stderr, "wish: realloc error %s", strerror(errno));
+                exit(1);
+            }
+            for (int i = argc; i < args_sz; i++) {
+                args[i] = NULL;
+            }
+        }
+    }
+    for (int i = 0; i < argc; i++) {
+        printf("jmarquina: %s", args[i]);
     }
     // TODO(notes): // strsep, read the manulal, it overwrites the first char
     // that is a sep character with null, and sets buffer to point to the next 
