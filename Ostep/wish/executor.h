@@ -5,7 +5,6 @@
 
 #include <stdlib.h>
 
-#define PATH "/bin/ls"
 void execute(int argc, char **argv);
 
 #endif  // _executor_h_
