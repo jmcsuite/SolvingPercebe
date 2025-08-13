@@ -88,7 +88,7 @@ void execute(int argc, char **argv) {
     if (!verify_cmd(full_path)) {
         fprintf(stderr, "wish: can't run command, error=%s\n", strerror(errno));
         free(full_path);
-        exit(1);
+        return;
     }
 
     argv[0] = full_path;
