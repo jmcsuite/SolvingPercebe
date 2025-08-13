@@ -1,10 +1,6 @@
 // executor.h
 // Provides functions for executing a wish command.
-#ifndef _executor_h_
-#define _executor_h_
-
-#include <stdlib.h>
-
+#ifndef _EXECUTOR_H_
+#define _EXECUTOR_H_
 void execute(int argc, char **argv);
-
-#endif  // _executor_h_
+#endif  // _EXECUTOR_H_

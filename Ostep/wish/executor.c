@@ -7,6 +7,8 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+#include "directory.h"
+
 const char* _PATH_ = "/usr/bin/";
 
 char *get_cmd(const char *path, const char *name) {
@@ -41,7 +43,8 @@ void run_command(char **argv) {
     // child process.
     if (pid == 0) {
         execv(argv[0], argv);
-        return;
+        fprintf(stderr, "wish: execv error %s\n", strerror(errno));
+        exit(-1);
     }
     if (wait(NULL) == -1) {
         fprintf(stderr, "wish: wait failed %s\n", strerror(errno));
@@ -49,14 +52,14 @@ void run_command(char **argv) {
     }
 }
 
-bool handle_wish_cmd(char **argv) {
+bool handle_wish_cmd(int argc, char **argv) {
     if (strcmp("cd", argv[0]) == 0) {
-        // run_cd();
+        handle_cd(argc, argv);
         return true;
     }
     if (strcmp("exit", argv[0]) == 0) {
-        exit(0);
-        // return true;
+        handle_exit(argc, argv);
+        return true;
     }
     if (strcmp("path", argv[0]) == 0) {
         // handle_path();
@@ -77,7 +80,7 @@ void execute(int argc, char **argv) {
                 "wish: array of arguments needs to be nullptr terminated\n");
         exit(1);
     }
-    if (handle_wish_cmd(argv)) return;
+    if (handle_wish_cmd(argc, argv)) return;
 
     // handle non-custom cmd.
     // mallocs full_path.
