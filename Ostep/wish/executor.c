@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 const char* _PATH_ = "/usr/bin/";
@@ -31,6 +32,39 @@ bool verify_cmd(const char *path) {
     return true;
 }
 
+void run_command(char **argv) {
+    pid_t pid = fork();
+    if (pid == -1) {
+        fprintf(stderr, "wish: fork failed %s\n", strerror(errno));
+        exit(1);
+    }
+    // child process.
+    if (pid == 0) {
+        execv(argv[0], argv);
+        return;
+    }
+    if (wait(NULL) == -1) {
+        fprintf(stderr, "wish: wait failed %s\n", strerror(errno));
+        exit(1);
+    }
+}
+
+bool handle_wish_cmd(char **argv) {
+    if (strcmp("cd", argv[0]) == 0) {
+        // run_cd();
+        return true;
+    }
+    if (strcmp("exit", argv[0]) == 0) {
+        exit(0);
+        // return true;
+    }
+    if (strcmp("path", argv[0]) == 0) {
+        // handle_path();
+        return true;
+    }
+    return false;
+}
+
 // void run_cmd(int argc, char *full_path, char **argv);
 
 // Don't modify the strings pointed by argv!.
@@ -38,11 +72,23 @@ bool verify_cmd(const char *path) {
 // strings.
 // Argv last arguments points to NULL;
 void execute(int argc, char **argv) {
+    if (argv[argc] != NULL) {
+        fprintf(stderr,
+                "wish: array of arguments needs to be nullptr terminated\n");
+        exit(1);
+    }
+    if (handle_wish_cmd(argv)) return;
+
+    // handle non-custom cmd.
+    // mallocs full_path.
     char *full_path = get_cmd(_PATH_, argv[0]);
     if (!verify_cmd(full_path)) {
         fprintf(stderr, "wish: can't run command, error=%s\n", strerror(errno));
+        free(full_path);
         exit(1);
-        // free(full_path);
     }
-    // printf("jmarquina: found command"); NOW EXECUTE COMMAND
+
+    argv[0] = full_path;
+    run_command(argv);
+    free(full_path);
 }

@@ -1,2 +1,2 @@
-ls aoeu jmarq	ii
-stat 
+ls
+stat ./wish.c

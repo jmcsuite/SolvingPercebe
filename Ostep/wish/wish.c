@@ -39,7 +39,9 @@ void process_line(char *buffer, size_t sz) {
             }
         }
     }
-    execute(argc, args);
+    if (argc > 0) {
+        execute(argc, args);
+    }
     free(args);
 
     //TODO(next steps): // let's execute something from PATH using this chars 
