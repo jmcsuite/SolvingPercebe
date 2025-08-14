@@ -8,8 +8,7 @@
 #include <unistd.h>
 
 #include "directory.h"
-
-const char* _PATH_ = "/usr/bin/";
+#include "path_handler.h"
 
 char *get_cmd(const char *path, const char *name) {
     size_t full_size = strlen(path) + strlen(name) + 1;
@@ -62,7 +61,7 @@ bool handle_wish_cmd(int argc, char **argv) {
         return true;
     }
     if (strcmp("path", argv[0]) == 0) {
-        // handle_path();
+        handle_path(argc, argv);
         return true;
     }
     return false;
@@ -82,12 +81,15 @@ void execute(int argc, char **argv) {
     }
     if (handle_wish_cmd(argc, argv)) return;
 
-    // handle non-custom cmd.
-    // mallocs full_path.
-    char *full_path = get_cmd(_PATH_, argv[0]);
-    if (!verify_cmd(full_path)) {
-        fprintf(stderr, "wish: can't run command, error=%s\n", strerror(errno));
+    char *full_path = NULL;
+    for (size_t i = 0; PATHS[i] != NULL; i++) {
+        full_path = get_cmd(PATHS[i], argv[0]);
+        if (verify_cmd(full_path)) break;
         free(full_path);
+        full_path = NULL;
+    }
+    if (full_path == NULL) {
+        fprintf(stderr, "wish: can't run command, error=%s\n", strerror(errno));
         return;
     }
 
