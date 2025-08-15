@@ -1,6 +1,7 @@
 // wish.c
 // command line shell.
 #include "executor.h"
+#include "error_handler.h"
 
 #include <errno.h>
 #include <stdio.h>
@@ -10,7 +11,7 @@
 
 bool batch_mode = false;
 
-void process_line(char *buffer, size_t sz) {
+void process_line(char *buffer) {
     int args_sz = 2;
     char **args = malloc(args_sz * sizeof(char *));
     if (args == NULL) {
@@ -43,20 +44,24 @@ void process_line(char *buffer, size_t sz) {
         execute(argc, args);
     }
     free(args);
+}
 
-    //TODO(next steps): // let's execute something from PATH using this chars 
-    //  First wi would need to check path.
+void parse_ampersand(char *buffer) {
+    char *cmd = NULL;
+    while ((cmd = strsep(&buffer, "&")))  {
+        process_line(cmd); 
+    }
 }
 
 void wish(FILE *f) {
     char *buffer = NULL;
     size_t size = 0;
-    // TODO : maybe in batch job print a nl?
     if (!batch_mode) {
         printf("wish> ");
     }
     while (getline(&buffer, &size, f) != -1) {
-        process_line(buffer, size); 
+        parse_ampersand(buffer);
+        wait_all();
         if (!batch_mode) {
             printf("wish> ");
         }
@@ -68,7 +73,9 @@ void wish(FILE *f) {
 void handle_file(char *file_name) {
     FILE *f = fopen(file_name, "r");
     if (f == NULL) {
-        fprintf(stderr, "wish: can't open file");
+        print_error();
+        // fprintf(stderr, "wish: can't open file");
+        exit(1);
     }
     wish(f);
     fclose(f);
@@ -80,7 +87,8 @@ void handle_interactive() {
 
 int main(int argc, char* argv[]) {
     if (argc > 2) {
-        fprintf(stderr, "wish: too many arguments");
+        print_error();
+        // fprintf(stderr, "wish: too many arguments");
         exit(1);
     }
     if (argc == 2) {

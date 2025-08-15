@@ -10,6 +10,9 @@
 #include "directory.h"
 #include "path_handler.h"
 #include "redirect.h"
+#include "error_handler.h"
+
+int running_subprocess = 0;
 
 char *get_cmd(const char *path, const char *name) {
     size_t full_size = strlen(path) + strlen(name) + 1;
@@ -26,7 +29,6 @@ char *get_cmd(const char *path, const char *name) {
     return cmd;
 }
 
-// TODO(different tests) : one for different commands, other for different parsing.
 bool verify_cmd(const char *path) {
     if (access(path, X_OK) == -1) {
         return false;
@@ -57,9 +59,16 @@ void run_command(char **argv, FILE* out) {
         fprintf(stderr, "wish: execv error %s\n", strerror(errno));
         exit(-1);
     }
-    if (wait(NULL) == -1) {
-        fprintf(stderr, "wish: wait failed %s\n", strerror(errno));
-        exit(1);
+    running_subprocess += 1;
+}
+
+void wait_all() {
+    while (running_subprocess > 0) {
+        if (wait(NULL) == -1) {
+            fprintf(stderr, "wish: wait failed %s\n", strerror(errno));
+            exit(1);
+        }
+        running_subprocess -= 1;
     }
 }
 
@@ -110,7 +119,7 @@ void execute(int argc, char **argv) {
     }
     char* full_path = get_full_path(argc, argv);
     if (full_path == NULL) {
-        fprintf(stderr, "wish: can't run command, error=%s\n", strerror(errno));
+        print_error();
         return;
     }
 

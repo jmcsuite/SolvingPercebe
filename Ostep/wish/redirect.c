@@ -4,6 +4,8 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "error_handler.h"
+
 bool handle_redirection(int *argc, char **argv, FILE **out) {
     *out = NULL;
     int redirect_count = 0;
@@ -18,15 +20,18 @@ bool handle_redirection(int *argc, char **argv, FILE **out) {
         return true;
     }
     if (redirect_count > 1) {
-        fprintf(stderr, "wish: redirect command found more than once\n");
+        print_error();
+        // fprintf(stderr, "wish: redirect command found more than once\n");
         return false;
     }
     if (redirect_index == 0) {
-        fprintf(stderr, "wish: redirect error, no command found\n");
+        print_error();
+        // fprintf(stderr, "wish: redirect error, no command found\n");
         return false;
     }
     if (redirect_index + 2 != *argc) {
-        fprintf(stderr, "wish: too many arguments for redirect\n");
+        print_error();
+        // fprintf(stderr, "wish: too many arguments for redirect\n");
         return false;
     }
     argv[redirect_index] = NULL;
