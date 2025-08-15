@@ -51,6 +51,10 @@ bool handle_redirection(int *argc, char **argv, FILE **out) {
     char *file_index = redirect_index + 1;
     if (*file_index == '\0') {
         file_index = argv[arg_index+1];
+        if (arg_index + 2 != *argc) {
+            print_error();
+            return false;
+        }
         *argc = *argc - 1;
     }
     // find_next;
