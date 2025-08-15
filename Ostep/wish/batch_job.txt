@@ -1,2 +1,2 @@
 ls
-stat ./wish.c
+stat ./wish.c > out.txt

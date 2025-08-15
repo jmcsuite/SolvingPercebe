@@ -9,6 +9,7 @@
 
 #include "directory.h"
 #include "path_handler.h"
+#include "redirect.h"
 
 char *get_cmd(const char *path, const char *name) {
     size_t full_size = strlen(path) + strlen(name) + 1;
@@ -33,7 +34,7 @@ bool verify_cmd(const char *path) {
     return true;
 }
 
-void run_command(char **argv) {
+void run_command(char **argv, FILE* out) {
     pid_t pid = fork();
     if (pid == -1) {
         fprintf(stderr, "wish: fork failed %s\n", strerror(errno));
@@ -41,6 +42,17 @@ void run_command(char **argv) {
     }
     // child process.
     if (pid == 0) {
+        if (out != NULL) {
+            if (dup2(fileno(out), fileno(stdout)) == -1) {
+                fprintf(stderr, "wish: dup2 error%s\n", strerror(errno));
+                exit(-1);
+            }
+            if (dup2(fileno(out), fileno(stderr)) == -1) {
+                fprintf(stderr, "wish: dup2 error%s\n", strerror(errno));
+                exit(-1);
+            }
+            fclose(out);
+        }
         execv(argv[0], argv);
         fprintf(stderr, "wish: execv error %s\n", strerror(errno));
         exit(-1);
@@ -67,7 +79,17 @@ bool handle_wish_cmd(int argc, char **argv) {
     return false;
 }
 
-// void run_cmd(int argc, char *full_path, char **argv);
+char *get_full_path(int argc, char **argv) {
+    char *full_path = NULL;
+    for (size_t i = 0; PATHS[i] != NULL; i++) {
+        full_path = get_cmd(PATHS[i], argv[0]);
+        if (verify_cmd(full_path)) break;
+        free(full_path);
+        full_path = NULL;
+    }
+    return full_path;
+}
+
 
 // Don't modify the strings pointed by argv!.
 // It is safe to change which strings argv points, but not the underlying
@@ -81,19 +103,18 @@ void execute(int argc, char **argv) {
     }
     if (handle_wish_cmd(argc, argv)) return;
 
-    char *full_path = NULL;
-    for (size_t i = 0; PATHS[i] != NULL; i++) {
-        full_path = get_cmd(PATHS[i], argv[0]);
-        if (verify_cmd(full_path)) break;
-        free(full_path);
-        full_path = NULL;
+
+    FILE *out = NULL;
+    if (!handle_redirection(&argc, argv, &out)) {
+        return;
     }
+    char* full_path = get_full_path(argc, argv);
     if (full_path == NULL) {
         fprintf(stderr, "wish: can't run command, error=%s\n", strerror(errno));
         return;
     }
 
     argv[0] = full_path;
-    run_command(argv);
+    run_command(argv, out);
     free(full_path);
 }
