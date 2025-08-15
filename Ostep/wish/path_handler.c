@@ -10,6 +10,7 @@ char *init_path[] = {
 };
 
 char **PATHS = init_path;
+void append_slash(char **path);
 
 void handle_path(int argc, char **argv) {
     if (PATHS != init_path) {
@@ -29,6 +30,27 @@ void handle_path(int argc, char **argv) {
     for (int i = 0; i < argc-1; i++) {
         size_t sz = strlen(argv[i+1]) + 1;
         PATHS[i] = malloc(sz * sizeof(char));
+        if (PATHS[i] == NULL) {
+            fprintf(stderr, "wish: malloc failed %s", strerror(errno));
+        }
         strcpy(PATHS[i], argv[i+1]);
+        append_slash(&PATHS[i]);
     }
+}
+
+void append_slash(char **path) {
+    if (strlen(*path) == 0) {
+        fprintf(stderr, "wish: path handler failed");
+        exit(1);
+    }
+    int last = strlen(*path) - 1;
+    if ((*path)[last] == '/') return;
+    char *new_path = malloc((strlen(*path)+2) * sizeof(char));
+    if (new_path == NULL) {
+        fprintf(stderr, "wish: malloc failed %s", strerror(errno));
+    }
+    strcpy(new_path, *path);
+    new_path[last+1] = '/';
+    new_path[last+2] = '\0';
+    *path = new_path;
 }
